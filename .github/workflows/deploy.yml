@@ -1,0 +1,19 @@
+name: Resource-Aware CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+        
+      - name: Gatekeeper Hardware Validation
+        run: ./preflight_check.sh
+          
+      - name: Mock Heavy Infrastructure Build
+        run: echo "Hardware verified. Executing heavy Docker/AI build operations safely..."
